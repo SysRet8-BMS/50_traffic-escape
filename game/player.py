@@ -9,19 +9,26 @@ class Player:
         self.color=(60,160,220)
         self.move_cooldown=0
 
-    def move(self, keys, min_x, max_x):
+    def move(self, keys, min_x, max_x, max_y):
+        # cooldown only limits lane changes, forward/back stays responsive
         if self.move_cooldown>0:
             self.move_cooldown-=1
-            return
         dx=dy=0
         if keys[pygame.K_LEFT] or keys[pygame.K_a]: dx=-LANE_W
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]: dx=LANE_W
         if keys[pygame.K_UP] or keys[pygame.K_w]: dy=-8
         if keys[pygame.K_DOWN] or keys[pygame.K_s]: dy=8
-        nx=max(min_x,min(max_x-self.rect.width,self.rect.x+dx))
-        ny=max(0,self.rect.y+dy)
-        if dx: self.rect.x=nx; self.move_cooldown=12
-        if dy: self.rect.y=ny
+        if dx and self.move_cooldown==0:
+            self.rect.x=max(min_x,min(max_x-self.rect.width,self.rect.x+dx))
+            self.move_cooldown=12
+        if dy:
+            # clamp both ends (the old code let the player walk off the bottom)
+            self.rect.y=max(0,min(max_y-self.rect.height,self.rect.y+dy))
+
+    def snap_to_lane(self, lanes):
+        lane=round((self.rect.centerx-LANE_W/2)/LANE_W)
+        lane=max(0,min(lanes-1,lane))
+        self.rect.centerx=lane*LANE_W+LANE_W//2
 
     def draw(self,screen):
         # car body
