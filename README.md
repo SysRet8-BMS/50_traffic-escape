@@ -9,6 +9,10 @@ pip install -r requirements.txt
 python main.py
 ```
 
+## Compatibility
+
+Use Python 3.11 for compatibility with the Pygame 2.5 package used by this project.
+
 ## Controls
 
 | Key | Action |
@@ -56,7 +60,10 @@ traffic-escape/
 
 Submission is only the following three things:
 
-- [] A 10-second video of gameplay **before** your changes, showing the bug/broken behavior
-- [] A 10-second video of gameplay **after** your changes, showing the bug fixed and the new features working
-- [] The Chat/LLM used page link, with the complete chat history
+- [x] A 10-second video of gameplay **before** your changes, showing the bug/broken behavior
+- [x] A 10-second video of gameplay **after** your changes, showing the bug fixed and the new features working
+- [x] The Chat/LLM used page link, with the complete chat history
 
+
+## Resources (Hyperlink)
+[Chat History With Claude AI](https://claude.ai/chat/aa67e87b-062d-4e83-8b9f-1e84567fedb5)
